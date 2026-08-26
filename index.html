@@ -10,128 +10,230 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
 <style>
-:root{--pink:#EC1E79;--pink-deep:#B4155C;--plum:#5C1240;--plum-2:#7A1E52;--paper:#FFF7FB;--ink:#231018;}
+:root{--pink:#EC1E79;--pink-deep:#B4155C;--plum:#5C1240;--plum-2:#7A1E52;--paper:#FFF7FB;--ink:#231018;--sand:#F6E3ED;}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:"DM Sans",Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55}
+body{font-family:"DM Sans",Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55;overflow-x:hidden}
 img{max-width:100%;display:block}
 h1,h2,h3{font-weight:900;letter-spacing:-.01em;line-height:1.08}
 h2{font-size:clamp(1.9rem,4vw,3rem);margin-bottom:.6em}
-.kicker{font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.85rem;margin-bottom:1.1em;display:block}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-section{padding:96px 0}
-.fade{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+section{padding:90px 0;position:relative}
+.fade{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .fade.in{opacity:1;transform:none}
-.hero{position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:var(--plum)}
-.hero::before{content:"";position:absolute;inset:0;background:url(img/hero.jpg) center/cover no-repeat;opacity:.55}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(92,18,64,.55),rgba(92,18,64,.88))}
-.hero .wrap{position:relative;z-index:2;padding-top:60px;padding-bottom:60px}
-.hero img.logo{width:min(520px,72vw);margin:0 auto 34px}
+.stagger>*{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(2){transition-delay:.12s}
+.stagger.in>*:nth-child(3){transition-delay:.24s}
+.stagger.in>*:nth-child(4){transition-delay:.36s}
+/* topo texture */
+.topo{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23EC1E79' stroke-opacity='.06' stroke-width='1.6'%3E%3Cpath d='M60 380c40-70 10-120 60-160s130-10 150-70 90-60 130-110'/%3E%3Cpath d='M20 400c50-80 20-140 70-185s140-15 165-80 100-70 145-125'/%3E%3Cpath d='M-20 420c60-90 30-160 80-210s150-20 180-90S350-10 400-70'/%3E%3Ccircle cx='330' cy='330' r='40'/%3E%3Ccircle cx='330' cy='330' r='70'/%3E%3Ccircle cx='330' cy='330' r='100'/%3E%3C/g%3E%3C/svg%3E")}
+/* progress tracker */
+#tracker{position:fixed;top:0;left:0;right:0;height:52px;z-index:60;background:rgba(92,18,64,.92);backdrop-filter:blur(8px);display:flex;align-items:center;gap:16px;padding:0 18px;transform:translateY(-100%);transition:transform .4s ease}
+#tracker.show{transform:none}
+#tracker .lab{color:#F9A8CE;font-size:.72rem;font-weight:700;letter-spacing:.14em;white-space:nowrap}
+#tracker .bar{position:relative;flex:1;height:14px}
+#tracker .bar svg{position:absolute;inset:0;width:100%;height:100%}
+#tracker .dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--pink);border:3px solid #fff;transform:translate(-50%,-50%);box-shadow:0 0 12px rgba(236,30,121,.9);transition:left .1s linear}
+#tracker .km{color:#fff;font-weight:900;font-size:.85rem;min-width:96px;text-align:right;font-variant-numeric:tabular-nums}
+/* dot nav */
+#dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:55;display:flex;flex-direction:column;gap:14px}
+#dots a{width:11px;height:11px;border-radius:50%;background:#d9b3c7;display:block;position:relative;transition:transform .2s,background .2s}
+#dots a.on{background:var(--pink);transform:scale(1.5)}
+#dots a span{position:absolute;right:22px;top:50%;transform:translateY(-50%);background:var(--plum);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.08em;padding:4px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+#dots a:hover span{opacity:1}
+/* chips + signage */
+.cp{display:inline-flex;align-items:center;gap:10px;border:2px dashed var(--pink);color:var(--pink);border-radius:999px;padding:7px 16px;font-weight:900;font-size:.8rem;letter-spacing:.16em;margin-bottom:1.1em;background:rgba(255,255,255,.6)}
+.cp .chev{display:inline-block;animation:chev 1.2s infinite}
+@keyframes chev{0%,100%{transform:translateX(0);opacity:.5}50%{transform:translateX(4px);opacity:1}}
+.cp.lt{border-color:#F9A8CE;color:#F9A8CE;background:rgba(92,18,64,.35)}
+/* route dividers */
+.route{display:block;width:100%;height:120px;margin:-30px 0}
+.route path.bg{fill:none;stroke:var(--sand);stroke-width:5;stroke-dasharray:1.2 1.6}
+.route path.fg{fill:none;stroke:var(--pink);stroke-width:5;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 1.6s ease}
+.route.in path.fg{stroke-dashoffset:0}
+.route .cpmark{opacity:0;transition:opacity .5s ease 1.2s}
+.route.in .cpmark{opacity:1}
+/* hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:var(--plum);overflow:hidden}
+#heroBg{position:absolute;inset:-8% 0;background:url(img/hero.jpg) center/cover no-repeat;opacity:.55;will-change:transform}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(92,18,64,.5),rgba(92,18,64,.9))}
+.hero .wrap{position:relative;z-index:2;padding:80px 24px}
+.hero img.logo{width:min(520px,72vw);margin:0 auto 30px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.4))}
 .hero h1{font-size:clamp(2.2rem,5.4vw,4rem);margin-bottom:.5em}
-.hero p{font-size:clamp(1.05rem,2vw,1.35rem);max-width:46em;margin:0 auto 2em;color:#FBD9EA}
-.btn{display:inline-block;background:var(--pink);color:#fff;font-weight:700;padding:16px 34px;border-radius:999px;text-decoration:none;font-size:1.05rem;transition:transform .15s ease,background .15s ease}
+.hero p{font-size:clamp(1.05rem,2vw,1.3rem);max-width:46em;margin:0 auto 2em;color:#FBD9EA}
+.badge{display:inline-block;background:var(--pink);color:#fff;font-weight:900;letter-spacing:.2em;font-size:.78rem;padding:8px 18px;border-radius:999px;margin-bottom:26px;animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(236,30,121,.5)}50%{box-shadow:0 0 0 14px rgba(236,30,121,0)}}
+.btn{display:inline-block;background:var(--pink);color:#fff;font-weight:700;padding:16px 34px;border-radius:999px;text-decoration:none;font-size:1.05rem;transition:transform .15s ease,background .15s ease;position:relative;overflow:hidden}
 .btn:hover{background:#fff;color:var(--pink);transform:translateY(-2px)}
-.stats{background:var(--pink);color:#fff;padding:64px 0}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;text-align:center}
-.stat b{display:block;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;line-height:1.1}
+.scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;color:#F9A8CE;font-size:.72rem;letter-spacing:.2em;font-weight:700;text-align:center}
+.scrollcue .arr{display:block;margin:8px auto 0;width:2px;height:34px;background:linear-gradient(180deg,#F9A8CE,transparent);animation:drop 1.6s infinite}
+@keyframes drop{0%{transform:translateY(-8px);opacity:0}40%{opacity:1}100%{transform:translateY(8px);opacity:0}}
+.dust{position:absolute;border-radius:50%;background:#F9A8CE;opacity:.25;filter:blur(2px);animation:float 9s infinite ease-in-out}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-40px)}}
+/* stats */
+.stats{background:var(--pink);color:#fff;padding:64px 0;position:relative;overflow:hidden}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;text-align:center;position:relative}
+.stat b{display:block;font-size:clamp(1.7rem,3.2vw,2.6rem);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
 .stat span{display:block;margin-top:.4em;font-size:.95rem;color:#FBD9EA}
+/* split */
 .split{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
 .split p{margin-bottom:1em;font-size:1.06rem}
 .split .cite{font-style:italic;color:#8a6b7b;font-size:.9rem}
 .rounded{border-radius:14px;box-shadow:0 18px 44px rgba(92,18,64,.18)}
+.tilt{transition:transform .3s ease}
+.tilt:hover{transform:rotate(-1.2deg) scale(1.02)}
+/* team */
 .team{background:var(--paper)}
-.team .lead{max-width:52em;font-size:1.15rem;margin-bottom:56px}
+.team .lead{max-width:52em;font-size:1.15rem;margin-bottom:52px}
 .riders{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.rider{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 38px rgba(92,18,64,.12)}
-.rider .ph{height:340px;overflow:hidden}
-.rider .ph img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
-.rider .body{padding:28px 30px 32px}
+.rider{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 38px rgba(92,18,64,.12);transition:transform .3s ease,box-shadow .3s ease}
+.rider:hover{transform:translateY(-6px);box-shadow:0 26px 54px rgba(92,18,64,.2)}
+.rider .ph{height:330px;overflow:hidden}
+.rider .ph img{width:100%;height:100%;object-fit:cover;object-position:center 25%;transition:transform .6s ease}
+.rider:hover .ph img{transform:scale(1.06)}
 .pill{display:inline-block;background:var(--plum);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+.rider .body{padding:26px 30px 30px}
 .rider h3{font-size:1.5rem;margin-bottom:.6em}
 .rider ul{list-style:none;margin-bottom:1em}
-.rider li{padding:.28em 0;border-bottom:1px solid #F6E3ED;font-size:.98rem}
+.rider li{padding:.28em 0;border-bottom:1px solid var(--sand);font-size:.98rem}
 .rider li:last-child{border-bottom:0}
 .rider em{color:#8a6b7b;font-size:.92rem}
-.proof .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.proof ul{list-style:none;margin-top:8px}
-.proof li{padding:.6em 0;border-bottom:1px solid #F6E3ED;font-size:1.05rem}
-.proof .pics{display:grid;gap:22px}
-.y25{margin-top:56px;padding-top:34px;border-top:2px solid #F6E3ED}
+/* profile chart */
+.profilebox{background:#fff;border-radius:16px;box-shadow:0 14px 38px rgba(92,18,64,.12);padding:34px 30px 22px;margin-top:44px;position:relative}
+.profilebox h3{font-size:1.05rem;letter-spacing:.12em;color:var(--pink);text-transform:uppercase;margin-bottom:6px}
+.profilebox .hint{font-size:.85rem;color:#8a6b7b;margin-bottom:12px}
+#profile{width:100%;height:auto;display:block}
+#profile .area{fill:url(#pgrad)}
+#profile .line{fill:none;stroke:var(--pink);stroke-width:3;stroke-linejoin:round}
+#profile .mk{fill:#fff;stroke:var(--pink);stroke-width:3;cursor:pointer;transition:r .15s}
+#profile .mk:hover{fill:var(--pink)}
+#profile .mk.gold{fill:var(--pink)}
+#profile text{font-family:"DM Sans",Arial;font-size:11px;fill:#8a6b7b;font-weight:700;letter-spacing:.1em}
+#tip{position:absolute;pointer-events:none;background:var(--plum);color:#fff;padding:10px 14px;border-radius:10px;font-size:.85rem;line-height:1.4;opacity:0;transition:opacity .15s;white-space:nowrap;z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+#tip b{color:#F9A8CE}
+.y25{margin-top:46px;padding-top:30px;border-top:2px dashed var(--sand)}
 .y25 h3{color:var(--pink);text-transform:uppercase;letter-spacing:.12em;font-size:1rem;margin-bottom:16px}
 .y25 ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .y25 li{font-size:.98rem;border-left:3px solid var(--pink);padding-left:12px}
+/* programme tabs */
 .prog{background:var(--plum);color:#fff}
-.prog h2,.prog .kicker{color:#fff}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:24px}
-.cols h3{color:#F9A8CE;text-transform:uppercase;font-size:1rem;letter-spacing:.12em;margin-bottom:.9em}
-.cols p{color:#F3D2E3;font-size:.99rem;margin-bottom:.9em}
+.prog h2{color:#fff}
+.tabs{display:flex;gap:10px;margin:26px 0 0;flex-wrap:wrap}
+.tabs button{background:transparent;border:2px solid #F9A8CE;color:#F9A8CE;font-family:inherit;font-weight:900;letter-spacing:.1em;font-size:.85rem;padding:11px 22px;border-radius:999px;cursor:pointer;transition:all .2s}
+.tabs button.on,.tabs button:hover{background:var(--pink);border-color:var(--pink);color:#fff}
+.panel{display:none;padding-top:30px;max-width:56em}
+.panel.on{display:block;animation:slidein .45s ease}
+@keyframes slidein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.panel p{color:#F3D2E3;font-size:1.05rem;margin-bottom:.9em}
+.routebook{display:flex;gap:8px;align-items:center;color:#F9A8CE;font-size:.78rem;font-weight:700;letter-spacing:.16em;margin-top:38px}
+.routebook .seg{height:6px;flex:1;border-radius:3px;background:rgba(249,168,206,.25);overflow:hidden;position:relative}
+.routebook .seg i{position:absolute;inset:0;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform 1s ease}
+.routebook.in .seg i{transform:none}
+/* opportunity accordions */
 .opp{background:var(--pink);color:#fff}
 .opp h2{color:#fff}
 .opp .lead{max-width:56em;margin-bottom:.9em;color:#FDE3F0;font-size:1.08rem}
-.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
-.tier{background:var(--pink-deep);border-radius:14px;padding:26px 24px 28px;transition:transform .15s ease}
-.tier:hover{transform:translateY(-4px)}
-.tier h3{font-size:1.15rem;margin-bottom:1em;color:#fff}
-.tier ul{list-style:none}
-.tier li{font-size:.92rem;color:#FDE3F0;padding:.34em 0 .34em 1em;position:relative}
-.tier li::before{content:"–";position:absolute;left:0;color:#F9A8CE}
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+.tier{background:var(--pink-deep);border-radius:14px;overflow:hidden}
+.tier button.h{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;color:#fff;font-family:inherit;font-weight:900;font-size:1.08rem;padding:22px 24px;cursor:pointer;text-align:left}
+.tier button.h .pl{width:26px;height:26px;border-radius:50%;border:2px solid #F9A8CE;color:#F9A8CE;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:transform .3s;flex:none;margin-left:12px}
+.tier.open button.h .pl{transform:rotate(45deg);background:#fff;color:var(--pink);border-color:#fff}
+.tier .bd{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.tier .bd ul{list-style:none;padding:0 24px 22px}
+.tier .bd li{font-size:.95rem;color:#FDE3F0;padding:.4em 0 .4em 1.1em;position:relative}
+.tier .bd li::before{content:"";position:absolute;left:0;top:.95em;width:8px;height:2px;background:#F9A8CE}
+/* contact + footer */
 .contact{text-align:center}
+.finish{display:inline-block;font-size:.78rem;font-weight:900;letter-spacing:.2em;color:var(--pink);border:2px solid var(--pink);padding:8px 18px;border-radius:8px;margin-bottom:24px;background:repeating-linear-gradient(45deg,transparent 0 8px,rgba(236,30,121,.12) 8px 16px)}
 .contact p{max-width:44em;margin:0 auto 2em;font-size:1.1rem}
-.contact .mail{display:block;margin-top:1.6em;color:var(--pink);font-weight:700;text-decoration:none;font-size:1.05rem}
 footer{background:var(--plum);color:#F3D2E3;padding:48px 0;text-align:center;font-size:.92rem}
 footer img{width:70px;margin:0 auto 14px}
-@media (max-width:860px){
+@media (max-width:900px){
+ #dots{display:none}
  .stats .wrap{grid-template-columns:1fr 1fr;gap:34px}
- .split,.riders,.proof .grid{grid-template-columns:1fr}
+ .split,.riders{grid-template-columns:1fr}
  .y25 ul{grid-template-columns:1fr 1fr}
- .cols{grid-template-columns:1fr}
- .tiers{grid-template-columns:1fr 1fr}
- section{padding:64px 0}
+ .tiers{grid-template-columns:1fr}
+ section{padding:60px 0}
 }
-@media (max-width:520px){.tiers{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){
+ *{animation:none!important;transition:none!important}
+ .fade,.stagger>*{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
 
-<header class="hero">
+<div id="tracker" aria-hidden="true">
+ <span class="lab">RIBBLE OUTLIERS · ROUTE 2027</span>
+ <div class="bar">
+  <svg preserveAspectRatio="none" viewBox="0 0 100 14"><path d="M0,7 L100,7" stroke="#F9A8CE" stroke-opacity=".45" stroke-width="2" stroke-dasharray="2 2.4" fill="none"/></svg>
+  <div class="dot" id="rider"></div>
+ </div>
+ <span class="km" id="km">0.0 KM</span>
+</div>
+
+<nav id="dots" aria-label="Course sections"></nav>
+
+<header class="hero" id="start">
+ <div id="heroBg"></div>
+ <div class="dust" style="width:8px;height:8px;left:18%;top:60%"></div>
+ <div class="dust" style="width:5px;height:5px;left:70%;top:40%;animation-delay:2s"></div>
+ <div class="dust" style="width:10px;height:10px;left:84%;top:70%;animation-delay:4s"></div>
+ <div class="dust" style="width:6px;height:6px;left:30%;top:30%;animation-delay:6s"></div>
  <div class="wrap">
+  <span class="badge">GRAND DEPART · 2027</span>
   <img class="logo" src="img/logo-white.png" alt="Ribble Outliers">
   <h1>Back the Outliers in 2027</h1>
   <p>A British gravel team with two reigning National Champions, two UCI Gravel World Series wins in 2026, and a channel the sport&rsquo;s fastest-growing audience already follows.</p>
   <a class="btn" href="#partner" data-track="cta_hero">Start the conversation</a>
  </div>
+ <div class="scrollcue">RIDE THE ROUTE<span class="arr"></span></div>
 </header>
 
 <div class="stats">
- <div class="wrap">
-  <div class="stat fade"><b>2</b><span>Reigning British National Champions</span></div>
-  <div class="stat fade"><b>2</b><span>UCI Gravel World Series wins in 2026</span></div>
-  <div class="stat fade"><b>769,155</b><span>Instagram views in the last 90 days</span></div>
-  <div class="stat fade"><b>6</b><span>Podiums from 12 top-level results</span></div>
+ <div class="wrap stagger fade">
+  <div class="stat"><b data-n="2">0</b><span>Reigning British National Champions</span></div>
+  <div class="stat"><b data-n="2">0</b><span>UCI Gravel World Series wins in 2026</span></div>
+  <div class="stat"><b data-n="769155">0</b><span>Instagram views in the last 90 days</span></div>
+  <div class="stat"><b data-n="6">0</b><span>Podiums from 12 top-level results</span></div>
  </div>
 </div>
 
-<section>
+<svg class="route" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+ <path class="bg" d="M-20,60 C220,10 420,110 620,60 S1000,15 1220,60" pathLength="100"/>
+ <path class="fg" d="M-20,60 C220,10 420,110 620,60 S1000,15 1220,60" pathLength="100"/>
+ <g class="cpmark"><circle cx="620" cy="60" r="9" fill="#fff" stroke="#EC1E79" stroke-width="4"/></g>
+</svg>
+
+<section id="direction" class="topo">
  <div class="wrap split">
   <div class="fade">
-   <span class="kicker" style="color:var(--pink)">Gravel is restructuring around teams</span>
+   <span class="cp">CP 01 · THE DIRECTION <span class="chev">››</span></span>
    <h2>The sport has picked a direction</h2>
    <p>Professional gravel is mid-way through a structural shift. The privateer model that defined the field three years ago is breaking, and team-based racing is taking its place.</p>
    <p>The clearest signal came at Unbound Gravel 200. Keegan Swenson and Mads W&uuml;rtz Schmidt broke clear for Specialized Off-Road, Schmidt punctured with 75 miles to go, and Swenson handed over his own wheel so his teammate could ride on to the win.</p>
    <p>For a brand, the timing matters. A structured gravel team today costs a fraction of an equivalent road programme, and it reaches an audience that traditional cycling has struggled to add.</p>
    <p class="cite">Cyclingnews, Unbound Gravel 200 race report, 2026</p>
   </div>
-  <img class="rounded fade" src="img/peloton.jpg" alt="Gravel racing" loading="lazy">
+  <img class="rounded tilt fade" src="img/peloton.jpg" alt="Gravel racing" loading="lazy">
  </div>
 </section>
 
-<section class="team" id="team">
+<svg class="route" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+ <path class="bg" d="M-20,60 C260,110 460,10 660,60 S1020,105 1220,60" pathLength="100"/>
+ <path class="fg" d="M-20,60 C260,110 460,10 660,60 S1020,105 1220,60" pathLength="100"/>
+ <g class="cpmark"><circle cx="660" cy="60" r="9" fill="#fff" stroke="#EC1E79" stroke-width="4"/></g>
+</svg>
+
+<section class="team topo" id="team">
  <div class="wrap">
-  <span class="kicker fade" style="color:var(--pink)">Confirmed for 2027</span>
+  <span class="cp fade">CP 02 · THE TEAM <span class="chev">››</span></span>
   <h2 class="fade">The team for 2027</h2>
   <p class="lead fade">Jenson Young and Sophie Wright are confirmed for 2027, and both are reigning British National Champions. Around them, a five-rider squad with a professional crew.</p>
-  <div class="riders">
-   <div class="rider fade">
+  <div class="riders stagger fade">
+   <div class="rider">
     <div class="ph"><img src="img/sophie.jpg" alt="Sophie Wright" loading="lazy"></div>
     <div class="body">
      <span class="pill">British National Champion 2026</span>
@@ -145,7 +247,7 @@ footer img{width:70px;margin:0 auto 14px}
      <em>Two UCI Gravel World Series wins in 2026.</em>
     </div>
    </div>
-   <div class="rider fade">
+   <div class="rider">
     <div class="ph"><img src="img/jenson.jpg" alt="Jenson Young" loading="lazy"></div>
     <div class="body">
      <span class="pill">British National Champion 2026</span>
@@ -162,25 +264,22 @@ footer img{width:70px;margin:0 auto 14px}
  </div>
 </section>
 
-<section class="proof">
+<svg class="route" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+ <path class="bg" d="M-20,60 C200,15 480,105 700,55 S1040,20 1220,65" pathLength="100"/>
+ <path class="fg" d="M-20,60 C200,15 480,105 700,55 S1040,20 1220,65" pathLength="100"/>
+ <g class="cpmark"><circle cx="700" cy="55" r="9" fill="#fff" stroke="#EC1E79" stroke-width="4"/></g>
+</svg>
+
+<section class="proof topo" id="proof">
  <div class="wrap">
-  <span class="kicker fade" style="color:var(--pink)">Performance as a team</span>
+  <span class="cp fade">CP 03 · THE PROOF <span class="chev">››</span></span>
   <h2 class="fade">Two seasons of proof</h2>
-  <div class="grid">
-   <div class="fade">
-    <p>Podiums and gold at UCI and Gravel Earth level in both the men&rsquo;s and the women&rsquo;s categories, capped by a British National Championship double in August.</p>
-    <ul>
-     <li>British National Champions, men and women, August 2026</li>
-     <li>2 UCI Gravel World Series wins for Sophie</li>
-     <li>2nd for Jenson at the UCI Gralloch, 2nd for Sophie at UCI Eislek</li>
-     <li>Battle on the Beach win, Gravel Earth podiums</li>
-     <li>769,155 Instagram views in the last 90 days</li>
-    </ul>
-   </div>
-   <div class="pics fade">
-    <img class="rounded" src="img/podium.jpg" alt="Santa Vall podium" loading="lazy">
-    <img class="rounded" src="img/beach.jpg" alt="Battle on the Beach" loading="lazy">
-   </div>
+  <p class="fade" style="max-width:52em">Podiums and gold at UCI and Gravel Earth level in both the men&rsquo;s and the women&rsquo;s categories, capped by a British National Championship double in August. Ride the 2026 season profile below, every summit is a result.</p>
+  <div class="profilebox fade">
+   <h3>The 2026 season profile</h3>
+   <p class="hint">Hover or tap the summits.</p>
+   <svg id="profile" viewBox="0 0 1000 190"></svg>
+   <div id="tip"></div>
   </div>
   <div class="y25 fade">
    <h3>2025, the debut season</h3>
@@ -194,59 +293,73 @@ footer img{width:70px;margin:0 auto 14px}
  </div>
 </section>
 
-<section class="prog">
+<svg class="route" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+ <path class="bg" d="M-20,55 C240,105 440,20 640,65 S1000,110 1220,55" pathLength="100"/>
+ <path class="fg" d="M-20,55 C240,105 440,20 640,65 S1000,110 1220,55" pathLength="100"/>
+ <g class="cpmark"><circle cx="640" cy="65" r="9" fill="#fff" stroke="#EC1E79" stroke-width="4"/></g>
+</svg>
+
+<section class="prog" id="programme">
  <div class="wrap">
-  <span class="kicker fade" style="color:#F9A8CE">Built to be backed</span>
+  <span class="cp lt fade">CP 04 · THE ROUTE BOOK <span class="chev">››</span></span>
   <h2 class="fade">The 2027 programme</h2>
-  <div class="cols">
-   <div class="fade">
-    <h3>The squad</h3>
-    <p>Five riders. Jenson and Sophie confirmed as the core, both reigning British National Champions.</p>
-    <p>Three further riders join against the calendar, chosen to support the leads rather than compete with them.</p>
-   </div>
-   <div class="fade">
-    <h3>The calendar</h3>
-    <p>A European UCI Gravel World Series core with a selective UK national programme keeping the team visible at home.</p>
-    <p>Partners see the calendar before it locks, and activation events can be built into it.</p>
-   </div>
-   <div class="fade">
-    <h3>The crew</h3>
-    <p>A Team Principal on location, a dedicated mechanic, a soigneur at UCI weekends, contracted coaching for the leads.</p>
-    <p>A content manager owns central output, so partner stories ship all season.</p>
-   </div>
+  <div class="tabs fade" role="tablist">
+   <button class="on" data-p="p1" data-track="tab_squad">THE SQUAD</button>
+   <button data-p="p2" data-track="tab_calendar">THE CALENDAR</button>
+   <button data-p="p3" data-track="tab_crew">THE CREW</button>
   </div>
+  <div class="panel on" id="p1">
+   <p>Five riders. Jenson and Sophie confirmed as the core, both reigning British National Champions.</p>
+   <p>Three further riders join against the calendar, chosen to support the leads rather than compete with them.</p>
+  </div>
+  <div class="panel" id="p2">
+   <p>A European UCI Gravel World Series core with a selective UK national programme keeping the team visible at home.</p>
+   <p>Partners see the calendar before it locks, and activation events can be built into it.</p>
+  </div>
+  <div class="panel" id="p3">
+   <p>A Team Principal on location, a dedicated mechanic, a soigneur at UCI weekends, contracted coaching for the leads.</p>
+   <p>A content manager owns central output, so partner stories ship all season.</p>
+  </div>
+  <div class="routebook fade" id="rb">EUROPE <span class="seg"><i></i></span> UK <span class="seg"><i style="transition-delay:.5s"></i></span> WORLDS</div>
  </div>
 </section>
+
+<svg class="route" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+ <path class="bg" d="M-20,60 C260,10 480,110 680,60 S1020,15 1220,60" pathLength="100"/>
+ <path class="fg" d="M-20,60 C260,10 480,110 680,60 S1020,15 1220,60" pathLength="100"/>
+ <g class="cpmark"><circle cx="680" cy="60" r="9" fill="#fff" stroke="#EC1E79" stroke-width="4"/></g>
+</svg>
 
 <section class="opp" id="opportunity">
  <div class="wrap">
-  <span class="kicker fade" style="color:#FDE3F0">Partner with the Outliers</span>
+  <span class="cp lt fade">CP 05 · THE OPPORTUNITY <span class="chev">››</span></span>
   <h2 class="fade">The opportunity</h2>
   <p class="lead fade">Gravel is the fastest-growing space in cycling, and the Outliers pair a results-proven team with a channel that reaches the audience brands want. For 2027 we are opening one headline partnership and a small category 2 group.</p>
   <p class="lead fade">Every partnership is built around activation, with defined deliverables per tier and quarterly reporting, so the return is visible inside the contract year.</p>
-  <div class="tiers">
-   <div class="tier fade"><h3>Headline Partner, &pound;POA</h3><ul>
+  <div class="tiers fade">
+   <div class="tier open"><button class="h" data-track="tier_headline">Headline Partner, &pound;POA <span class="pl">+</span></button><div class="bd"><ul>
     <li>Naming rights across team assets and communications</li>
     <li>Primary placement on kit, bikes, vehicles, and media backdrops</li>
-    <li>Full integration into films, interviews, and race-day content</li></ul></div>
-   <div class="tier fade"><h3>Category 2, &pound;10,000</h3><ul>
+    <li>Full integration into films, interviews, and race-day content</li></ul></div></div>
+   <div class="tier"><button class="h" data-track="tier_cat2">Category 2, &pound;10,000 <span class="pl">+</span></button><div class="bd"><ul>
     <li>Logo placement on kit, bikes, and team vehicles</li>
     <li>Feature integration across race reports and social content</li>
-    <li>Activation with the team at chosen events</li></ul></div>
-   <div class="tier fade"><h3>Official Supplier</h3><ul>
+    <li>Activation with the team at chosen events</li></ul></div></div>
+   <div class="tier"><button class="h" data-track="tier_supplier">Official Supplier <span class="pl">+</span></button><div class="bd"><ul>
     <li>Product partnership in an open category</li>
     <li>Placement on digital channels and event material</li>
-    <li>Product integration into race and adventure storytelling</li></ul></div>
-   <div class="tier fade"><h3>Every partner</h3><ul>
+    <li>Product integration into race and adventure storytelling</li></ul></div></div>
+   <div class="tier"><button class="h" data-track="tier_every">Every partner <span class="pl">+</span></button><div class="bd"><ul>
     <li>Defined deliverables agreed at signature</li>
     <li>Quarterly reporting on reach and engagement</li>
-    <li>Access to athletes for promotional work</li></ul></div>
+    <li>Access to athletes for promotional work</li></ul></div></div>
   </div>
  </div>
 </section>
 
-<section class="contact" id="partner">
+<section class="contact topo" id="partner">
  <div class="wrap fade">
+  <span class="finish">FINISH LINE · 111 KM</span>
   <h2>Start the conversation</h2>
   <p>The full 2027 programme and partnership detail are ready to walk through. Tell us who you are and we will come back to you the same day.</p>
   <a class="btn" href="mailto:partnerships@ribble.com?subject=Ribble%20Outliers%202027" data-track="cta_email">partnerships@ribble.com</a>
@@ -262,41 +375,152 @@ footer img{width:70px;margin:0 auto 14px}
 </footer>
 
 <script>
-var TRACK = { ga4: "", beacon: "" }; /* set beacon to your Apps Script URL, ga4 to a G- ID */
+/* ---- tracking ---- */
+var TRACK = { ga4: "", beacon: "" };
 var P = new URLSearchParams(location.search).get('p') || 'direct';
 var SID = Math.random().toString(36).slice(2,10);
 function send(ev, extra){
   var payload = Object.assign({p:P, ev:ev, sid:SID, ts:Date.now(), ref:document.referrer||''}, extra||{});
-  if (TRACK.beacon){
-    try{ navigator.sendBeacon(TRACK.beacon, new Blob([JSON.stringify(payload)], {type:'text/plain'})); }catch(e){}
-  }
+  if (TRACK.beacon){ try{ navigator.sendBeacon(TRACK.beacon, new Blob([JSON.stringify(payload)], {type:'text/plain'})); }catch(e){} }
   if (TRACK.ga4 && window.gtag){ gtag('event', ev, {prospect:P}); }
 }
 if (TRACK.ga4){
   var gs=document.createElement('script'); gs.async=true;
   gs.src='https://www.googletagmanager.com/gtag/js?id='+TRACK.ga4;
   document.head.appendChild(gs);
-  window.dataLayer=window.dataLayer||[];
-  window.gtag=function(){dataLayer.push(arguments);};
+  window.dataLayer=window.dataLayer||[]; window.gtag=function(){dataLayer.push(arguments);};
   gtag('js', new Date()); gtag('config', TRACK.ga4, {prospect:P});
 }
 send('open');
-var hb=0, hbMax=180;
-setInterval(function(){
-  if (document.visibilityState==='visible' && hb<hbMax){ hb++; send('hb',{n:hb}); }
-}, 10000);
+var hb=0;
+setInterval(function(){ if (document.visibilityState==='visible' && hb<180){ hb++; send('hb',{n:hb}); } }, 10000);
 var marks={25:false,50:false,75:false,100:false};
+function pct(){ var h=document.documentElement; return (h.scrollTop)/(h.scrollHeight-innerHeight); }
 window.addEventListener('scroll', function(){
-  var h=document.documentElement, pct=Math.round((h.scrollTop+innerHeight)/h.scrollHeight*100);
-  [25,50,75,100].forEach(function(m){ if(pct>=m && !marks[m]){ marks[m]=true; send('scroll_'+m); } });
+  var p100=Math.round((document.documentElement.scrollTop+innerHeight)/document.documentElement.scrollHeight*100);
+  [25,50,75,100].forEach(function(m){ if(p100>=m && !marks[m]){ marks[m]=true; send('scroll_'+m); } });
 }, {passive:true});
 document.querySelectorAll('[data-track]').forEach(function(el){
   el.addEventListener('click', function(){ send(el.getAttribute('data-track')); });
 });
+
+/* ---- reveal ---- */
 var io=new IntersectionObserver(function(es){
   es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
 },{threshold:.15});
-document.querySelectorAll('.fade').forEach(function(el){ io.observe(el); });
+document.querySelectorAll('.fade,.route,.stagger,#rb').forEach(function(el){ io.observe(el); });
+
+/* ---- tracker bar + parallax ---- */
+var tracker=document.getElementById('tracker'), rider=document.getElementById('rider'), km=document.getElementById('km'), heroBg=document.getElementById('heroBg');
+window.addEventListener('scroll', function(){
+  var p=Math.max(0,Math.min(1,pct()));
+  rider.style.left=(p*100)+'%';
+  km.textContent=(p*111).toFixed(1)+' KM';
+  tracker.classList.toggle('show', document.documentElement.scrollTop>innerHeight*.7);
+  if (heroBg && document.documentElement.scrollTop<innerHeight){ heroBg.style.transform='translateY('+(document.documentElement.scrollTop*.35)+'px)'; }
+},{passive:true});
+
+/* ---- dot nav ---- */
+var secs=[['start','DEPART'],['direction','CP1 DIRECTION'],['team','CP2 TEAM'],['proof','CP3 PROOF'],['programme','CP4 ROUTE BOOK'],['opportunity','CP5 OPPORTUNITY'],['partner','FINISH']];
+var dots=document.getElementById('dots');
+secs.forEach(function(s){
+  var a=document.createElement('a'); a.href='#'+s[0];
+  var sp=document.createElement('span'); sp.textContent=s[1]; a.appendChild(sp);
+  dots.appendChild(a);
+});
+var sio=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(e.isIntersecting){
+      var i=secs.findIndex(function(s){return s[0]===e.target.id;});
+      dots.querySelectorAll('a').forEach(function(a,j){a.classList.toggle('on',j===i);});
+    }
+  });
+},{threshold:.35});
+secs.forEach(function(s){ var el=document.getElementById(s[0]); if(el) sio.observe(el); });
+
+/* ---- stat count-up ---- */
+var cio=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(!e.isIntersecting) return;
+    cio.unobserve(e.target);
+    var b=e.target, n=parseInt(b.getAttribute('data-n'),10), t0=null;
+    function step(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/1400); k=1-Math.pow(1-k,3);
+      b.textContent=Math.round(n*k).toLocaleString('en-GB'); if(k<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  });
+},{threshold:.6});
+document.querySelectorAll('.stat b').forEach(function(b){ cio.observe(b); });
+
+/* ---- season profile ---- */
+var results=[
+ {m:'FEB',race:'Santa Vall',series:'Gravel Earth',rider:'Sophie Wright',res:'2nd GC',h:80},
+ {m:'FEB',race:'Castellon',series:'UCI World Series',rider:'Ben Thomas',res:'8th',h:36},
+ {m:'MAR',race:'Battle on the Beach',series:'UK',rider:'Jenson Young',res:'1st',h:96,g:1},
+ {m:'APR',race:'Dirty Reiver',series:'Focal Series',rider:'Metheven Bond',res:'2nd',h:78},
+ {m:'APR',race:'UCI 114',series:'UCI World Series',rider:'Sophie Wright',res:'3rd',h:66},
+ {m:'APR',race:'Monaco',series:'UCI World Series',rider:'Sophie Wright',res:'1st',h:98,g:1},
+ {m:'MAY',race:'The Traka 200',series:'Gravel Earth',rider:'Sophie Wright',res:'6th',h:46},
+ {m:'MAY',race:'The Gralloch',series:'UCI World Series',rider:'Jenson Young',res:'2nd',h:82},
+ {m:'MAY',race:'Gravel Desert',series:'Gravel Earth',rider:'Sophie Wright',res:'4th',h:56},
+ {m:'JUN',race:'Ranxo',series:'Gravel Earth',rider:'Sophie Wright',res:'4th',h:56},
+ {m:'JUN',race:'Millau Grands Causses',series:'UCI World Series',rider:'Sophie Wright',res:'1st',h:98,g:1},
+ {m:'JUN',race:'Eislek Luxembourg',series:'UCI World Series',rider:'Sophie Wright',res:'2nd',h:82},
+ {m:'AUG',race:'British National Championships',series:'Gravel',rider:'Jenson and Sophie',res:'1st and 1st',h:104,g:1}
+];
+var svg=document.getElementById('profile'), tip=document.getElementById('tip');
+var W=1000,H=190,base=150,x0=30,xs=(W-70)/(results.length-1);
+var ns='http://www.w3.org/2000/svg';
+var defs=document.createElementNS(ns,'defs');
+defs.innerHTML='<linearGradient id="pgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EC1E79" stop-opacity=".28"/><stop offset="1" stop-color="#EC1E79" stop-opacity=".02"/></linearGradient>';
+svg.appendChild(defs);
+var pts=results.map(function(r,i){ return [x0+i*xs, base-r.h]; });
+var dArea='M'+x0+','+base+' L'+pts.map(function(p){return p[0]+','+p[1];}).join(' L ')+' L'+(x0+(results.length-1)*xs)+','+base+' Z';
+var dLine='M'+pts.map(function(p){return p[0]+','+p[1];}).join(' L ');
+function el(t,at){ var e=document.createElementNS(ns,t); for(var k in at) e.setAttribute(k,at[k]); return e; }
+svg.appendChild(el('path',{d:dArea,'class':'area'}));
+svg.appendChild(el('path',{d:dLine,'class':'line'}));
+var seen={};
+results.forEach(function(r,i){
+  if(!seen[r.m]){ seen[r.m]=1;
+    var tx=el('text',{x:pts[i][0],y:base+24,'text-anchor':'middle'}); tx.textContent=r.m; svg.appendChild(tx);
+  }
+  var c=el('circle',{cx:pts[i][0],cy:pts[i][1],r:7,'class':'mk'+(r.g?' gold':'')});
+  function show(evt){
+    tip.innerHTML='<b>'+r.res+'</b> &middot; '+r.race+'<br>'+r.rider+' &middot; '+r.series;
+    tip.style.opacity=1;
+    var bb=svg.getBoundingClientRect(), px=bb.left+ (pts[i][0]/W)*bb.width, py=bb.top+(pts[i][1]/H)*bb.height;
+    var host=svg.parentNode.getBoundingClientRect();
+    tip.style.left=Math.max(4,Math.min(host.width-tip.offsetWidth-4,px-host.left-tip.offsetWidth/2))+'px';
+    tip.style.top=(py-host.top-tip.offsetHeight-14)+'px';
+    if(!show.sent){ show.sent=1; send('profile_hover'); }
+  }
+  c.addEventListener('mouseenter',show);
+  c.addEventListener('click',show);
+  c.addEventListener('mouseleave',function(){ tip.style.opacity=0; });
+  svg.appendChild(c);
+});
+
+/* ---- tabs ---- */
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('on');});
+    document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    document.getElementById(b.getAttribute('data-p')).classList.add('on');
+  });
+});
+
+/* ---- tier accordions ---- */
+function setTier(t,open){
+  var bd=t.querySelector('.bd');
+  t.classList.toggle('open',open);
+  bd.style.maxHeight=open? bd.scrollHeight+'px':'0px';
+}
+document.querySelectorAll('.tier').forEach(function(t){
+  setTier(t,t.classList.contains('open'));
+  t.querySelector('button.h').addEventListener('click',function(){ setTier(t,!t.classList.contains('open')); });
+});
+window.addEventListener('resize',function(){ document.querySelectorAll('.tier.open').forEach(function(t){ t.querySelector('.bd').style.maxHeight=t.querySelector('.bd').scrollHeight+'px'; }); });
 </script>
 </body>
 </html>
