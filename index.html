@@ -56,6 +56,10 @@ section{padding:96px 0}
 .proof ul{list-style:none;margin-top:8px}
 .proof li{padding:.6em 0;border-bottom:1px solid #F6E3ED;font-size:1.05rem}
 .proof .pics{display:grid;gap:22px}
+.y25{margin-top:56px;padding-top:34px;border-top:2px solid #F6E3ED}
+.y25 h3{color:var(--pink);text-transform:uppercase;letter-spacing:.12em;font-size:1rem;margin-bottom:16px}
+.y25 ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.y25 li{font-size:.98rem;border-left:3px solid var(--pink);padding-left:12px}
 .prog{background:var(--plum);color:#fff}
 .prog h2,.prog .kicker{color:#fff}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:24px}
@@ -79,6 +83,7 @@ footer img{width:70px;margin:0 auto 14px}
 @media (max-width:860px){
  .stats .wrap{grid-template-columns:1fr 1fr;gap:34px}
  .split,.riders,.proof .grid{grid-template-columns:1fr}
+ .y25 ul{grid-template-columns:1fr 1fr}
  .cols{grid-template-columns:1fr}
  .tiers{grid-template-columns:1fr 1fr}
  section{padding:64px 0}
@@ -160,7 +165,7 @@ footer img{width:70px;margin:0 auto 14px}
 <section class="proof">
  <div class="wrap">
   <span class="kicker fade" style="color:var(--pink)">Performance as a team</span>
-  <h2 class="fade">2026, the proof</h2>
+  <h2 class="fade">Two seasons of proof</h2>
   <div class="grid">
    <div class="fade">
     <p>Podiums and gold at UCI and Gravel Earth level in both the men&rsquo;s and the women&rsquo;s categories, capped by a British National Championship double in August.</p>
@@ -176,6 +181,15 @@ footer img{width:70px;margin:0 auto 14px}
     <img class="rounded" src="img/podium.jpg" alt="Santa Vall podium" loading="lazy">
     <img class="rounded" src="img/beach.jpg" alt="Battle on the Beach" loading="lazy">
    </div>
+  </div>
+  <div class="y25 fade">
+   <h3>2025, the debut season</h3>
+   <ul>
+    <li>20 podiums, 8 of them wins</li>
+    <li>UCI World Series wins for both leads</li>
+    <li>3 medals at the British Gravel Championships</li>
+    <li>2nd for Sophie at the European Championships</li>
+   </ul>
   </div>
  </div>
 </section>
