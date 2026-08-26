@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ribble Outliers 2027 · Partner with the team</title>
+<meta name="description" content="Back the Outliers in 2027. A British gravel team with two reigning National Champions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#EC1E79;--pink-deep:#B4155C;--plum:#5C1240;--plum-2:#7A1E52;--paper:#FFF7FB;--ink:#231018;}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55}
+img{max-width:100%;display:block}
+h1,h2,h3{font-weight:900;letter-spacing:-.01em;line-height:1.08}
+h2{font-size:clamp(1.9rem,4vw,3rem);margin-bottom:.6em}
+.kicker{font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.85rem;margin-bottom:1.1em;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.fade.in{opacity:1;transform:none}
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:var(--plum)}
+.hero::before{content:"";position:absolute;inset:0;background:url(img/hero.jpg) center/cover no-repeat;opacity:.55}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(92,18,64,.55),rgba(92,18,64,.88))}
+.hero .wrap{position:relative;z-index:2;padding-top:60px;padding-bottom:60px}
+.hero img.logo{width:min(520px,72vw);margin:0 auto 34px}
+.hero h1{font-size:clamp(2.2rem,5.4vw,4rem);margin-bottom:.5em}
+.hero p{font-size:clamp(1.05rem,2vw,1.35rem);max-width:46em;margin:0 auto 2em;color:#FBD9EA}
+.btn{display:inline-block;background:var(--pink);color:#fff;font-weight:700;padding:16px 34px;border-radius:999px;text-decoration:none;font-size:1.05rem;transition:transform .15s ease,background .15s ease}
+.btn:hover{background:#fff;color:var(--pink);transform:translateY(-2px)}
+.stats{background:var(--pink);color:#fff;padding:64px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;text-align:center}
+.stat b{display:block;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;line-height:1.1}
+.stat span{display:block;margin-top:.4em;font-size:.95rem;color:#FBD9EA}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.split p{margin-bottom:1em;font-size:1.06rem}
+.split .cite{font-style:italic;color:#8a6b7b;font-size:.9rem}
+.rounded{border-radius:14px;box-shadow:0 18px 44px rgba(92,18,64,.18)}
+.team{background:var(--paper)}
+.team .lead{max-width:52em;font-size:1.15rem;margin-bottom:56px}
+.riders{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.rider{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 14px 38px rgba(92,18,64,.12)}
+.rider .ph{height:340px;overflow:hidden}
+.rider .ph img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+.rider .body{padding:28px 30px 32px}
+.pill{display:inline-block;background:var(--plum);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+.rider h3{font-size:1.5rem;margin-bottom:.6em}
+.rider ul{list-style:none;margin-bottom:1em}
+.rider li{padding:.28em 0;border-bottom:1px solid #F6E3ED;font-size:.98rem}
+.rider li:last-child{border-bottom:0}
+.rider em{color:#8a6b7b;font-size:.92rem}
+.proof .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.proof ul{list-style:none;margin-top:8px}
+.proof li{padding:.6em 0;border-bottom:1px solid #F6E3ED;font-size:1.05rem}
+.proof .pics{display:grid;gap:22px}
+.prog{background:var(--plum);color:#fff}
+.prog h2,.prog .kicker{color:#fff}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:24px}
+.cols h3{color:#F9A8CE;text-transform:uppercase;font-size:1rem;letter-spacing:.12em;margin-bottom:.9em}
+.cols p{color:#F3D2E3;font-size:.99rem;margin-bottom:.9em}
+.opp{background:var(--pink);color:#fff}
+.opp h2{color:#fff}
+.opp .lead{max-width:56em;margin-bottom:.9em;color:#FDE3F0;font-size:1.08rem}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
+.tier{background:var(--pink-deep);border-radius:14px;padding:26px 24px 28px;transition:transform .15s ease}
+.tier:hover{transform:translateY(-4px)}
+.tier h3{font-size:1.15rem;margin-bottom:1em;color:#fff}
+.tier ul{list-style:none}
+.tier li{font-size:.92rem;color:#FDE3F0;padding:.34em 0 .34em 1em;position:relative}
+.tier li::before{content:"–";position:absolute;left:0;color:#F9A8CE}
+.contact{text-align:center}
+.contact p{max-width:44em;margin:0 auto 2em;font-size:1.1rem}
+.contact .mail{display:block;margin-top:1.6em;color:var(--pink);font-weight:700;text-decoration:none;font-size:1.05rem}
+footer{background:var(--plum);color:#F3D2E3;padding:48px 0;text-align:center;font-size:.92rem}
+footer img{width:70px;margin:0 auto 14px}
+@media (max-width:860px){
+ .stats .wrap{grid-template-columns:1fr 1fr;gap:34px}
+ .split,.riders,.proof .grid{grid-template-columns:1fr}
+ .cols{grid-template-columns:1fr}
+ .tiers{grid-template-columns:1fr 1fr}
+ section{padding:64px 0}
+}
+@media (max-width:520px){.tiers{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <div class="wrap">
+  <img class="logo" src="img/logo-white.png" alt="Ribble Outliers">
+  <h1>Back the Outliers in 2027</h1>
+  <p>A British gravel team with two reigning National Champions, two UCI Gravel World Series wins in 2026, and a channel the sport&rsquo;s fastest-growing audience already follows.</p>
+  <a class="btn" href="#partner" data-track="cta_hero">Start the conversation</a>
+ </div>
+</header>
+
+<div class="stats">
+ <div class="wrap">
+  <div class="stat fade"><b>2</b><span>Reigning British National Champions</span></div>
+  <div class="stat fade"><b>2</b><span>UCI Gravel World Series wins in 2026</span></div>
+  <div class="stat fade"><b>769,155</b><span>Instagram views in the last 90 days</span></div>
+  <div class="stat fade"><b>6</b><span>Podiums from 12 top-level results</span></div>
+ </div>
+</div>
+
+<section>
+ <div class="wrap split">
+  <div class="fade">
+   <span class="kicker" style="color:var(--pink)">Gravel is restructuring around teams</span>
+   <h2>The sport has picked a direction</h2>
+   <p>Professional gravel is mid-way through a structural shift. The privateer model that defined the field three years ago is breaking, and team-based racing is taking its place.</p>
+   <p>The clearest signal came at Unbound Gravel 200. Keegan Swenson and Mads W&uuml;rtz Schmidt broke clear for Specialized Off-Road, Schmidt punctured with 75 miles to go, and Swenson handed over his own wheel so his teammate could ride on to the win.</p>
+   <p>For a brand, the timing matters. A structured gravel team today costs a fraction of an equivalent road programme, and it reaches an audience that traditional cycling has struggled to add.</p>
+   <p class="cite">Cyclingnews, Unbound Gravel 200 race report, 2026</p>
+  </div>
+  <img class="rounded fade" src="img/peloton.jpg" alt="Gravel racing" loading="lazy">
+ </div>
+</section>
+
+<section class="team" id="team">
+ <div class="wrap">
+  <span class="kicker fade" style="color:var(--pink)">Confirmed for 2027</span>
+  <h2 class="fade">The team for 2027</h2>
+  <p class="lead fade">Jenson Young and Sophie Wright are confirmed for 2027, and both are reigning British National Champions. Around them, a five-rider squad with a professional crew.</p>
+  <div class="riders">
+   <div class="rider fade">
+    <div class="ph"><img src="img/sophie.jpg" alt="Sophie Wright" loading="lazy"></div>
+    <div class="body">
+     <span class="pill">British National Champion 2026</span>
+     <h3>Sophie Wright</h3>
+     <ul>
+      <li>1st, UCI Millau Grands Causses</li>
+      <li>1st, UCI Monaco</li>
+      <li>2nd, UCI Eislek Luxembourg</li>
+      <li>2nd GC Santa Vall, 3rd UCI 114</li>
+     </ul>
+     <em>Two UCI Gravel World Series wins in 2026.</em>
+    </div>
+   </div>
+   <div class="rider fade">
+    <div class="ph"><img src="img/jenson.jpg" alt="Jenson Young" loading="lazy"></div>
+    <div class="body">
+     <span class="pill">British National Champion 2026</span>
+     <h3>Jenson Young</h3>
+     <ul>
+      <li>1st, Battle on the Beach</li>
+      <li>2nd, UCI The Gralloch</li>
+      <li>4th, UCI 114</li>
+     </ul>
+     <em>Rated WorldTour level by his coach.</em>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="proof">
+ <div class="wrap">
+  <span class="kicker fade" style="color:var(--pink)">Performance as a team</span>
+  <h2 class="fade">2026, the proof</h2>
+  <div class="grid">
+   <div class="fade">
+    <p>Podiums and gold at UCI and Gravel Earth level in both the men&rsquo;s and the women&rsquo;s categories, capped by a British National Championship double in August.</p>
+    <ul>
+     <li>British National Champions, men and women, August 2026</li>
+     <li>2 UCI Gravel World Series wins for Sophie</li>
+     <li>2nd for Jenson at the UCI Gralloch, 2nd for Sophie at UCI Eislek</li>
+     <li>Battle on the Beach win, Gravel Earth podiums</li>
+     <li>769,155 Instagram views in the last 90 days</li>
+    </ul>
+   </div>
+   <div class="pics fade">
+    <img class="rounded" src="img/podium.jpg" alt="Santa Vall podium" loading="lazy">
+    <img class="rounded" src="img/beach.jpg" alt="Battle on the Beach" loading="lazy">
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="prog">
+ <div class="wrap">
+  <span class="kicker fade" style="color:#F9A8CE">Built to be backed</span>
+  <h2 class="fade">The 2027 programme</h2>
+  <div class="cols">
+   <div class="fade">
+    <h3>The squad</h3>
+    <p>Five riders. Jenson and Sophie confirmed as the core, both reigning British National Champions.</p>
+    <p>Three further riders join against the calendar, chosen to support the leads rather than compete with them.</p>
+   </div>
+   <div class="fade">
+    <h3>The calendar</h3>
+    <p>A European UCI Gravel World Series core with a selective UK national programme keeping the team visible at home.</p>
+    <p>Partners see the calendar before it locks, and activation events can be built into it.</p>
+   </div>
+   <div class="fade">
+    <h3>The crew</h3>
+    <p>A Team Principal on location, a dedicated mechanic, a soigneur at UCI weekends, contracted coaching for the leads.</p>
+    <p>A content manager owns central output, so partner stories ship all season.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="opp" id="opportunity">
+ <div class="wrap">
+  <span class="kicker fade" style="color:#FDE3F0">Partner with the Outliers</span>
+  <h2 class="fade">The opportunity</h2>
+  <p class="lead fade">Gravel is the fastest-growing space in cycling, and the Outliers pair a results-proven team with a channel that reaches the audience brands want. For 2027 we are opening one headline partnership and a small category 2 group.</p>
+  <p class="lead fade">Every partnership is built around activation, with defined deliverables per tier and quarterly reporting, so the return is visible inside the contract year.</p>
+  <div class="tiers">
+   <div class="tier fade"><h3>Headline Partner, &pound;POA</h3><ul>
+    <li>Naming rights across team assets and communications</li>
+    <li>Primary placement on kit, bikes, vehicles, and media backdrops</li>
+    <li>Full integration into films, interviews, and race-day content</li></ul></div>
+   <div class="tier fade"><h3>Category 2, &pound;10,000</h3><ul>
+    <li>Logo placement on kit, bikes, and team vehicles</li>
+    <li>Feature integration across race reports and social content</li>
+    <li>Activation with the team at chosen events</li></ul></div>
+   <div class="tier fade"><h3>Official Supplier</h3><ul>
+    <li>Product partnership in an open category</li>
+    <li>Placement on digital channels and event material</li>
+    <li>Product integration into race and adventure storytelling</li></ul></div>
+   <div class="tier fade"><h3>Every partner</h3><ul>
+    <li>Defined deliverables agreed at signature</li>
+    <li>Quarterly reporting on reach and engagement</li>
+    <li>Access to athletes for promotional work</li></ul></div>
+  </div>
+ </div>
+</section>
+
+<section class="contact" id="partner">
+ <div class="wrap fade">
+  <h2>Start the conversation</h2>
+  <p>The full 2027 programme and partnership detail are ready to walk through. Tell us who you are and we will come back to you the same day.</p>
+  <a class="btn" href="mailto:partnerships@ribble.com?subject=Ribble%20Outliers%202027" data-track="cta_email">partnerships@ribble.com</a>
+ </div>
+</section>
+
+<footer>
+ <div class="wrap">
+  <img src="img/mascot.png" alt="">
+  <div><b>Ribble Outliers</b></div>
+  <div>The Original Outliers, since 1897</div>
+ </div>
+</footer>
+
+<script>
+var TRACK = { ga4: "", beacon: "" }; /* set beacon to your Apps Script URL, ga4 to a G- ID */
+var P = new URLSearchParams(location.search).get('p') || 'direct';
+var SID = Math.random().toString(36).slice(2,10);
+function send(ev, extra){
+  var payload = Object.assign({p:P, ev:ev, sid:SID, ts:Date.now(), ref:document.referrer||''}, extra||{});
+  if (TRACK.beacon){
+    try{ navigator.sendBeacon(TRACK.beacon, new Blob([JSON.stringify(payload)], {type:'text/plain'})); }catch(e){}
+  }
+  if (TRACK.ga4 && window.gtag){ gtag('event', ev, {prospect:P}); }
+}
+if (TRACK.ga4){
+  var gs=document.createElement('script'); gs.async=true;
+  gs.src='https://www.googletagmanager.com/gtag/js?id='+TRACK.ga4;
+  document.head.appendChild(gs);
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments);};
+  gtag('js', new Date()); gtag('config', TRACK.ga4, {prospect:P});
+}
+send('open');
+var hb=0, hbMax=180;
+setInterval(function(){
+  if (document.visibilityState==='visible' && hb<hbMax){ hb++; send('hb',{n:hb}); }
+}, 10000);
+var marks={25:false,50:false,75:false,100:false};
+window.addEventListener('scroll', function(){
+  var h=document.documentElement, pct=Math.round((h.scrollTop+innerHeight)/h.scrollHeight*100);
+  [25,50,75,100].forEach(function(m){ if(pct>=m && !marks[m]){ marks[m]=true; send('scroll_'+m); } });
+}, {passive:true});
+document.querySelectorAll('[data-track]').forEach(function(el){
+  el.addEventListener('click', function(){ send(el.getAttribute('data-track')); });
+});
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.15});
+document.querySelectorAll('.fade').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
