@@ -83,6 +83,21 @@ section{padding:90px 0;position:relative}
 .kom .prog{position:absolute;bottom:36px;display:flex;gap:8px}
 .kom .prog i{width:26px;height:5px;border-radius:3px;background:rgba(249,168,206,.25);transition:background .3s}
 .kom .prog i.on{background:var(--pink)}
+/* scene */
+.scene{background:var(--plum-2);color:#fff;padding:0 0 90px;overflow:hidden}
+.scene .wrap{padding-top:64px}
+.scene h2{color:#fff;max-width:12em}
+.ticker{display:flex;background:var(--pink);color:#fff;padding:14px 0;white-space:nowrap;overflow:hidden}
+.ticker .tk{flex:none;font-weight:900;font-size:clamp(1rem,2.2vw,1.5rem);letter-spacing:.12em;animation:tick 22s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+.beats{max-width:44em;margin-top:10px}
+.beat{font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.5;color:#F3D2E3;padding:22px 0 22px 26px;border-left:4px solid var(--pink)}
+.beat+.beat{margin-top:6px}
+.beat b{color:#fff;font-weight:900}
+.crowd{margin-top:54px}
+.crowd h3{font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:#c98aa9;margin-bottom:16px}
+.cstrip{display:flex;flex-wrap:wrap;gap:10px 32px}
+.cstrip span{font-weight:900;font-size:1.15rem;color:#F9A8CE}
 /* team */
 .team{background:var(--paper)}
 .team .lead{max-width:52em;font-size:1.15rem;margin-bottom:52px}
@@ -213,6 +228,23 @@ footer img{width:70px;margin:0 auto 14px}
 </header>
 
 
+
+<section class="scene" id="scene">
+ <div class="ticker" aria-hidden="true"><div class="tk">FULL GAS &#10022; ALL GRIT NO QUIT &#10022; THE ORIGINAL OUTLIERS &#10022; RIDE GRAVEL &#10022; FULL GAS &#10022; ALL GRIT NO QUIT &#10022; THE ORIGINAL OUTLIERS &#10022; RIDE GRAVEL &#10022;&nbsp;</div><div class="tk">FULL GAS &#10022; ALL GRIT NO QUIT &#10022; THE ORIGINAL OUTLIERS &#10022; RIDE GRAVEL &#10022; FULL GAS &#10022; ALL GRIT NO QUIT &#10022; THE ORIGINAL OUTLIERS &#10022; RIDE GRAVEL &#10022;&nbsp;</div></div>
+ <div class="wrap">
+  <span class="cp lt fade">SECTOR 1 &middot; THE SCENE <span class="chev">&rsaquo;&rsaquo;</span></span>
+  <h2 class="fade">Gravel is where cycling is cool</h2>
+  <div class="beats">
+   <p class="beat fade">The stars come on their days off. <b>Wout van Aert</b> lines up at gravel races nobody makes him ride, and <b>Lachlan Morton</b> chose Three Peaks over a road calendar. When the biggest engines in the sport pick a discipline for fun, the audience follows.</p>
+   <p class="beat fade">The style brands do not sponsor the scene, they move in. <b>Pas Normal Studios</b> built its own gravel team, and this is where its marketing and content money goes.</p>
+   <p class="beat fade">The money is serious. <b>Specialized</b> backs its off-road riders at around six figures each, and an Unbound win now converts into a WorldTour contract.</p>
+  </div>
+  <div class="crowd fade">
+   <h3>Already spending in gravel</h3>
+   <div class="cstrip"><span>Red Bull</span><span>Pas Normal Studios</span><span>Specialized</span><span>Maurten</span><span>Canyon</span></div>
+  </div>
+ </div>
+</section>
 
 <svg class="route" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
  <path class="bg" d="M-20,60 C220,10 420,110 620,60 S1000,15 1220,60" pathLength="100"/>
@@ -474,7 +506,7 @@ window.addEventListener('scroll', function(){
   tracker.classList.toggle('show', document.documentElement.scrollTop>innerHeight*.7);
   if (heroBg && document.documentElement.scrollTop<innerHeight){ heroBg.style.transform='translateY('+(document.documentElement.scrollTop*.35)+'px)'; }
 },{passive:true});
-var secs=[['start','DEPART'],['direction','CP1 DIRECTION'],['category','KOM CATEGORY'],['team','CP2 TEAM'],['proof','CP3 PROOF'],['reach','FEED ZONE'],['programme','CP4 ROUTE BOOK'],['opportunity','CP5 OPPORTUNITY'],['partner','FINISH']];
+var secs=[['start','DEPART'],['scene','SECTOR 1 SCENE'],['direction','CP1 DIRECTION'],['category','KOM CATEGORY'],['team','CP2 TEAM'],['proof','CP3 PROOF'],['reach','FEED ZONE'],['programme','CP4 ROUTE BOOK'],['opportunity','CP5 OPPORTUNITY'],['partner','FINISH']];
 var dots=document.getElementById('dots');
 secs.forEach(function(s){
   var a=document.createElement('a'); a.href='#'+s[0];
