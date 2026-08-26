@@ -423,7 +423,7 @@ document.querySelectorAll('[data-track]').forEach(function(el){
 });
 var io=new IntersectionObserver(function(es){
   es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-},{threshold:.15});
+},{threshold:.05,rootMargin:'0px 0px 60px 0px'});
 document.querySelectorAll('.fade,.route,.stagger,#rb').forEach(function(el){ io.observe(el); });
 var tracker=document.getElementById('tracker'), rider=document.getElementById('rider'), km=document.getElementById('km'), heroBg=document.getElementById('heroBg');
 window.addEventListener('scroll', function(){
