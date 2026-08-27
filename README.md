@@ -1,22 +1,25 @@
 # Ribble Outliers 2027, partner microsite
 
-A single-page partner pitch for the 2027 season, hosted on GitHub Pages with per-prospect link tracking.
+Live at https://scylark.github.io/ribbleoutliers/ behind a password gate.
 
-## Going live, two steps
+## How it works
 
-1. **Upload the images.** On this repo page click Add file -> Upload files, and drag the `img` folder in (it lives in the Ribble Cycles/Microsite folder). Commit to main.
-2. **Turn on Pages.** Settings -> Pages -> Deploy from a branch -> `main`, folder `/ (root)`. Save. The site appears at `https://scylark.github.io/ribbleoutliers/` within a minute or two.
+- The page is AES-encrypted. This repo only ever contains ciphertext, so the copy and pricing are not readable from the source.
+- Minted links from `links.csv` carry the key in the URL fragment (`#k=...`), so prospects click straight through without typing anything. A bare visit shows the access-code screen.
+- Access code: shared privately. To change it, edit `index.src.html` locally (kept outside this repo, in the Ribble Cycles/Microsite folder), run `python3 tools/encrypt.py "NEWCODE" index.src.html index.html`, update the links, and push.
 
-## Tracking
+## Tracking, live
 
-Every outreach email uses a minted link from `links.csv`, for example `?p=mucoff`. The page logs open, read time (10-second heartbeats), scroll depth, and clicks on the contact button.
+Every visit logs to the private Google Sheet "Outliers site tracking" (vicivelo@gmail.com): open, 10-second heartbeats (read time), scroll depth, KOM view, tab clicks, tier expands, and contact clicks, each tagged with the prospect code from the minted link.
 
-To collect the data, follow the setup notes in `collector/apps-script.gs`. It writes every event to a Google Sheet you own. Once deployed, set `TRACK.beacon` in `index.html` to the web app URL. A GA4 property can be added later by setting `TRACK.ga4`.
+Read time per session = highest heartbeat count x 10 seconds.
 
-Read time per visit is the highest heartbeat count for a session multiplied by ten seconds.
+The collector is a Google Apps Script web app bound to the sheet. `collector/apps-script.gs` holds the code for reference.
 
-## Notes
+## Files
 
-- The page carries `noindex`, so search engines stay away while outreach runs.
-- Pricing on the page matches the partner deck. Edit the tier cards in `index.html` to change it.
-- Contact routes to partnerships@ribble.com.
+- `index.html` - the encrypted page served by GitHub Pages
+- `img/` - photography and brand assets
+- `links.csv` - minted per-prospect links for outreach
+- `tools/encrypt.py` - rebuilds `index.html` from the private source
+- `collector/apps-script.gs` - the tracking collector code
