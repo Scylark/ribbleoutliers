@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ribble Outliers · Rider delivery details</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700;9..40,900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"DM Sans",Arial,sans-serif;background:#5C1240;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.gate{padding:40px;max-width:480px;width:100%}
+.gate img{width:min(360px,80vw);margin:0 auto 30px;display:block}
+h1{font-weight:900;font-size:1.5rem;margin-bottom:.4em}
+p{color:#FBD9EA;margin-bottom:1.6em;font-size:.98rem}
+input{width:100%;padding:15px 18px;border-radius:12px;border:2px solid #B4155C;background:#7A1E52;color:#fff;font-size:1.05rem;font-family:inherit;text-align:center;letter-spacing:.1em;outline:none}
+input:focus{border-color:#EC1E79}
+button{margin-top:14px;width:100%;padding:15px;border:0;border-radius:999px;background:#EC1E79;color:#fff;font-weight:900;font-size:1rem;font-family:inherit;cursor:pointer;letter-spacing:.06em}
+button:hover{background:#fff;color:#EC1E79}
+.err{color:#F9A8CE;font-size:.85rem;margin-top:12px;min-height:1.2em}
+</style>
+</head>
+<body>
+<div class="gate">
+ <img src="img/logo-white.png" alt="Ribble Outliers">
+ <h1>Rider delivery details</h1>
+ <p>Confidential. Enter the password to view rider delivery details.</p>
+ <input id="pw" type="password" placeholder="PASSWORD" autocomplete="off">
+ <button id="go">Open</button>
+ <div class="err" id="err"></div>
+</div>
+<script>
+var SALT="vt+eBTSs2O2SN8vYCTPokg==", IV="mi0CNqlj0SU+Msbt", CT="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", ITER=150000;
+function b2a(b){var s=atob(b),u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;}
+function tryOpen(pw){
+  if(!pw) return;
+  var enc=new TextEncoder();
+  crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveKey']).then(function(km){
+    return crypto.subtle.deriveKey({name:'PBKDF2',salt:b2a(SALT),iterations:ITER,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  }).then(function(key){
+    return crypto.subtle.decrypt({name:'AES-GCM',iv:b2a(IV)},key,b2a(CT));
+  }).then(function(buf){
+    var h=new TextDecoder().decode(buf);
+    document.open(); document.write(h); document.close();
+  }).catch(function(){
+    document.getElementById('err').textContent='That password did not work.';
+  });
+}
+document.getElementById('go').addEventListener('click',function(){ tryOpen(document.getElementById('pw').value.trim()); });
+document.getElementById('pw').addEventListener('keydown',function(e){ if(e.key==='Enter') tryOpen(e.target.value.trim()); });
+</script>
+</body>
+</html>
